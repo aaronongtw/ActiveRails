@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @database.name %>
+  <%= @database.tablenum %>
+</p>
+
+<%= link_to 'Edit', edit_database_path(@database) %> |
+<%= link_to 'Back', databases_path %>
+
+<% if @database.tables.any? %>
+<% @database.tables.each do |t|%>
+<h5><%=link_to(t.name, t)%></h5>
+<% end %>
+<% end %>
+
+<%=link_to("New table?", new_table_path, :dbid => @database.id)%>

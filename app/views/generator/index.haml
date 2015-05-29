@@ -1,0 +1,19 @@
+=form_tag '/' do
+  %fieldset
+    %ol
+      %li
+        %label{:for => "Database"} Name:
+        %input{:type => "text", :name => "database", :class => "text"}
+      %li
+        %label{:for => "Table"} Table:
+        %input{:type => "text", :name => "table", :class => "text"}
+      %select{:for => "Relationship", :name =>"relationship"}
+        - @relationship.each do |r|
+          %option{:value => "#{r.name}"} #{r.name}
+      }
+      %li
+        %label{:for => "Table2"} Table2:
+        %input{:type => "text", :name => "table2", :class => "text"}
+    %input{:type => "submit", :value => "Send", :class => "button"}
+
+
