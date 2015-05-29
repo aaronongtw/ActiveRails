@@ -20,7 +20,32 @@
     <%= f.label :fieldnum %><br>
     <%= f.number_field :fieldnum%>
   </div>
+  <div class="field">
+  <%= f.label "Relative:" %>
+  <select for="relation" name = "relation"><br>
+    <option></option>
+    <% @relationship.each do |r| %>
+      <option><%= r.name %></option>
+      <% end %>
+  </label>
+  </select>
+  <div class="field">
+  <%= f.label "Relative Name:" %>
+  <select for="relativename" name="relativename">
+    <option></option>
+    <% Table.all.each do |t| %>
+    <option><%= t.name %></option>
+    <% end %>
+  </label>
+  </select>
+  </div>
+  </div>
+
+  <div class="hide">
+  <% if params[:dbid].present? %>
   <%= f.text_field :database_id, :value => params[:dbid]%>
+  <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -19,8 +19,9 @@
     <%= f.label :fieldtype %><br>
     <%= f.select :fieldtype, ['primary_key', 'string', 'text','integer','float','decimal','datetime','timestamp','time','date','binary','boolean'] %>
   </div>
+  <div class="hide">
     <%= f.text_field :table_id, :value => params[:dbid] %>
-  
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

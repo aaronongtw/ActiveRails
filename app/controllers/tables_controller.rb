@@ -15,10 +15,12 @@ class TablesController < ApplicationController
   # GET /tables/new
   def new
     @table = Table.new
+    @relationship = Relationship.all
   end
 
   # GET /tables/1/edit
   def edit
+    @relationship = Relationship.all
   end
 
   # POST /tables
