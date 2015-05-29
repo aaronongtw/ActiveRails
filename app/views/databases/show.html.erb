@@ -9,10 +9,21 @@
 <%= link_to 'Edit', edit_database_path(@database) %> |
 <%= link_to 'Back', databases_path %>
 
+
+<h2>Tables Created in Database </h2> 
 <% if @database.tables.any? %>
-<% @database.tables.each do |t|%>
-<h5><%=link_to(t.name, t)%></h5>
-<% end %>
+  <div class="mTable"><% @database.tables.each do |t|%>
+  
+    <h3><%=link_to(t.name, t)%></h3>
+    <div class = "mField">
+    <% t.fields.each do |f| %>
+      <h5>field : <%=link_to(f.name+':'+f.fieldtype, f)%></h5>
+      
+    <% end %>  
+    </div>
+    </div>
+  <% end %>
 <% end %>
 
-<%=link_to("New table?", {:controller => 'tables', :action => 'new', :dbid => @database.id})%>
+
+

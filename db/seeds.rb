@@ -33,6 +33,8 @@ t1.fields << f1
 d1.tables << t1 
 
 
+
+
 # bigint  int8  signed eight-byte integer
 # bigserial serial8 autoincrementing eight-byte integer
 # bit [ (n) ]   fixed-length bit string
