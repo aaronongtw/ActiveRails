@@ -25,7 +25,6 @@ class FieldsController < ApplicationController
   # POST /fields.json
   def create
     @field = Field.new(field_params)
-    @field.table_id = params[:dbid]
     respond_to do |format|
       if @field.save
         format.html { redirect_to @field, notice: 'Field was successfully created.' }

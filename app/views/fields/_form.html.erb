@@ -11,15 +11,16 @@
       </ul>
     </div>
   <% end %>
-  
+  <% @field.table_id = params[:dbid] %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :fieldtype %><br>
-    <%= f.text_field :fieldtype %>
+    <%= f.select :gender, ['Mare', 'Stallion', 'Gelding'] %>
   </div>
+    <%= f.text_field :table_id, :value => params[:dbid] %>
   
   <div class="actions">
     <%= f.submit %>
