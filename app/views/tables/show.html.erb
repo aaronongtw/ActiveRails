@@ -18,3 +18,12 @@
 
 <%= link_to 'Edit', edit_table_path(@table) %> |
 <%= link_to 'Back', tables_path %>
+
+
+<% if @table.fields.any? %>
+<% @table.fields.each do |t|%>
+<h5><%=link_to(t.name, t)%>:<%=t.fieldtype%></h5>
+<% end %>
+<% end %>
+
+<%=link_to("New field?", {:controller => 'fields', :action => 'new', :dbid => @table.id})%>

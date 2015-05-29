@@ -25,7 +25,7 @@ class FieldsController < ApplicationController
   # POST /fields.json
   def create
     @field = Field.new(field_params)
-
+    @field.table_id = params[:dbid]
     respond_to do |format|
       if @field.save
         format.html { redirect_to @field, notice: 'Field was successfully created.' }
@@ -69,6 +69,6 @@ class FieldsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def field_params
-      params.require(:field).permit(:name, :type, :table_id)
+      params.require(:field).permit(:name, :fieldtype, :table_id)
     end
 end

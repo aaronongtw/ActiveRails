@@ -14,9 +14,7 @@ class TablesController < ApplicationController
 
   # GET /tables/new
   def new
-    @database = Database.find params[:dbid]
     @table = Table.new
-    raise params.inspect
   end
 
   # GET /tables/1/edit

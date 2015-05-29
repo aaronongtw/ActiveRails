@@ -10,14 +10,14 @@
       </ul>
     </div>
   <% end %>
-
+  <% @table.database_id = params[:dbid] %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :database_id %><br>
-    <%= f.number_field :database_id %>
+    <%= f.label :fieldnum %><br>
+    <%= f.number_field :fieldnum%>
   </div>
   <div class="actions">
     <%= f.submit %>

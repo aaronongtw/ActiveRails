@@ -7,12 +7,12 @@
 
 <p>
   <strong>Type:</strong>
-  <%= @field.type %>
+  <%= @field.fieldtype %>
 </p>
 
 <p>
   <strong>Table:</strong>
-  <%= @field.table_id %>
+  <%= link_to @field.table_id, table_path(@field.table_id) %>
 </p>
 
 <%= link_to 'Edit', edit_field_path(@field) %> |
