@@ -1,0 +1,3 @@
+<% User.all.each do |u| %>
+<h5><%= link_to(u.email, u)%></h5>
+<% end %>
