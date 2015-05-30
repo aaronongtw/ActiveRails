@@ -10,7 +10,10 @@ Database.destroy_all
 Table.destroy_all
 Field.destroy_all
 Relationship.destroy_all
+User.destroy_all
 
+
+u1  = User.create :email => 'aotw@gmail.com'
 
 d1 = Database.create :name => 'Test Database', :tablenum => 1
 
@@ -29,7 +32,7 @@ f2 = Field.create( :name => 'age', :fieldtype => "integer"  )
 t1.relationships << r1 << r2 << r3 << r4 << r5 << r6
 t1.fields << f1
 
-
+u1.databases << d1
 d1.tables << t1 
 
 

@@ -27,7 +27,6 @@ class TablesController < ApplicationController
   # POST /tables.json
   def create
     @table = Table.new(table_params)
-
     respond_to do |format|
       if @table.save
         format.html { redirect_to @table, notice: 'Table was successfully created.' }
@@ -71,6 +70,6 @@ class TablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def table_params
-      params.require(:table).permit(:name, :database_id, :fieldnum)
+      params.require(:table).permit(:name, :database_id, :fieldnum, :relativename, :relation)
     end
 end

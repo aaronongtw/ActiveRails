@@ -2,12 +2,14 @@
 #
 # Table name: tables
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  database_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  fieldnum    :integer
+#  id           :integer          not null, primary key
+#  name         :string
+#  database_id  :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  fieldnum     :integer
+#  relation     :string
+#  relativename :string
 #
 
 class Table < ActiveRecord::Base

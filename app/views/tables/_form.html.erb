@@ -21,24 +21,12 @@
     <%= f.number_field :fieldnum%>
   </div>
   <div class="field">
-  <%= f.label "Relative:" %>
-  <select for="relation" name = "relation"><br>
-    <option></option>
-    <% @relationship.each do |r| %>
-      <option><%= r.name %></option>
-      <% end %>
-  </label>
-  </select>
+    <%= f.label "Relation: " %>
+    <%= f.select(:relation , Relationship.all.collect {|r| r.name}, {include_blank: 'None'})%>
+    </div>
   <div class="field">
-  <%= f.label "Relative Name:" %>
-  <select for="relativename" name="relativename">
-    <option></option>
-    <% Table.all.each do |t| %>
-    <option><%= t.name %></option>
-    <% end %>
-  </label>
-  </select>
-  </div>
+    <%= f.label "Relative Name: "%>
+    <%=f.select(:relativename , Table.all.collect {|t| t.name }, {include_blank: 'None'})%>
   </div>
 
   <div class="hide">

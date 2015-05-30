@@ -36,6 +36,18 @@
 #
 
 Rails.application.routes.draw do
+  get 'users/new'
+
+  get 'users/edit'
+
+  get 'users/create'
+
+  get 'users/show'
+
+  get 'users/destroy'
+
+  get 'users/update'
+
   root :to => 'generator#index'
   get '/generator' => 'generator#index'
   post '/' => 'generator#create'
