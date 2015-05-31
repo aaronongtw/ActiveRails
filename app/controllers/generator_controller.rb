@@ -1,14 +1,12 @@
 class GeneratorController < ApplicationController
   def index
-    @database = Database.new
-    @field = Field.all
-    @table = Table.new
-    @relationship = Relationship.all
+    if @current_use.present?
+      redirect_to users_path
+    end
   end
 
 
   def create
-    raise params.inspect
     # @database = Database.create
   end
 

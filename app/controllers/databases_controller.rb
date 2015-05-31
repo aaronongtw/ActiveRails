@@ -10,6 +10,7 @@ class DatabasesController < ApplicationController
   # GET /databases/1
   # GET /databases/1.json
   def show
+    params[:database_id] = params[:id]
     @table = Table.new
   end
 

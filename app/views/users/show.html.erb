@@ -1,2 +1,10 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
+
+<% @user.databases.each do |d| %>
+  <h4><%= link_to(d.name, "/users/#{@user.id}/databases/#{d.id}" ) %></h4>
+  <% end %>
+
+
+<%= link_to 'Edit', edit_users_path(@user) %> |
+<%= link_to 'Back', users_path %> | 

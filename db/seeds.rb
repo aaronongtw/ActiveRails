@@ -13,7 +13,7 @@ Relationship.destroy_all
 User.destroy_all
 
 
-u1  = User.create :email => 'aotw@gmail.com'
+u1  = User.create :email => 'admin@site', :admin => true, :password => 'password'
 
 d1 = Database.create :name => 'Test Database', :tablenum => 1
 
