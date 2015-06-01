@@ -65,13 +65,15 @@ Rails.application.routes.draw do
     collection do 
       get 'edit' => 'users#edit'
     end
+  end
+
     resources :databases do
       resources :tables do    
         resources :fields
       end
     end
 
-    end
+  
   resources :relationships
   root :to => 'generator#index'
   get '/generator' => 'generator#index'
