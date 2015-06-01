@@ -12,8 +12,8 @@
 
 <p>
   <strong>Table:</strong>
-  <%= link_to @field.table_id, table_path(@field.table_id) %>
+  <%= link_to @field.table_id,  user_database_table_path(@current_user.id, params[:database_id], @field.table_id) %>
 </p>
 
-<%= link_to 'Edit', edit_field_path(@field) %> |
-<%= link_to 'Back', fields_path %>
+<%= link_to 'Edit', edit_user_database_table_field_path %> |
+<%= link_to 'Back', user_database_table_field_path %>

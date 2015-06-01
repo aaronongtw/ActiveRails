@@ -15,13 +15,15 @@
     <h3><%=link_to(t.name, "/users/#{@current_user.id}/databases/#{@database.id}/tables/#{t.id}")%> <%=t.relation%> <%=t.relativename%></h3>
     <div class = "mField">
     <% t.fields.each do |f| %>
-      <h5>field  : <%=link_to(f.name+':'+f.fieldtype, "/users/#{@current_user.id}/databases/#{@database.id}/tables/#{t.id}/field/#{f.id}")%></h5>
+      <h5>field  : <%=link_to(f.name+':'+f.fieldtype, "/users/#{@current_user.id}/databases/#{@database.id}/tables/#{t.id}/fields/#{f.id}")%></h5>
     <% end %> 
     </div>   
   <% end %>
   
   </div>
 <% end %>
+
+<h4><%= link_to("Create New Table", new_user_database_table_path(@current_user.id, params[:database_id])) %></h4>
 
 
 
