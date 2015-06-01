@@ -1,3 +1,5 @@
+
+
 <p id="notice"><%= notice %></p>
 <p>
   <strong>Name:</strong>
@@ -5,25 +7,36 @@
   <%= @database.tablenum %>
 </p>
 
-<%= link_to 'Edit', edit_user_database_path %> |
-<%= link_to 'Back', user_databases_path %> | 
+<%= link_to 'Edit', edit_database_path %>
 
 
-<h2>Tables Created in Database </h2> 
+
+<div class="databasecanvas">
+<h2>Tables Created in <%=@database.name%> </h2> 
 <% if @database.tables.any? %>
-  <div class="mTable"><% @database.tables.each do |t|%>
-    <h3><%=link_to(t.name, "/users/#{@current_user.id}/databases/#{@database.id}/tables/#{t.id}")%> <%=t.relation%> <%=t.relativename%></h3>
+  <div class="mTable"><% @database.tables.each do |t|%> <div class="mBox">
+    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}")%> <%=t.relation%> <%=t.relativename%></h3>
     <div class = "mField">
     <% t.fields.each do |f| %>
-      <h5>field  : <%=link_to(f.name+':'+f.fieldtype, "/users/#{@current_user.id}/databases/#{@database.id}/tables/#{t.id}/fields/#{f.id}")%></h5>
+      <h5>field  : <%=link_to(f.name+':'+f.fieldtype, "/databases/#{@database.id}/tables/#{t.id}/fields/#{f.id}")%></h5>
     <% end %> 
     </div>   
+    </div>
   <% end %>
   
   </div>
 <% end %>
+<h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %></h4>
+<form action="/generator/<%=@database.id%>">
+  <label for="fname">File Name</label>
+  <input id="fname" name="fname" type="text">
+  <button>GENERATE</button>      
+</form>
+</div>
 
-<h4><%= link_to("Create New Table", new_user_database_table_path(@current_user.id, params[:database_id])) %></h4>
+
+ 
+
 
 
 

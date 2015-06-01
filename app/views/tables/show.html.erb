@@ -7,7 +7,7 @@
 
 <p>
   <strong>Database:</strong>
-  <%=link_to @table.database_id, "/users/#{@current_user.id}/databases/#{@table.database_id}/"%>
+  <%=link_to @database.name, database_path(@database.id)%>
 </p>
 
 <p>
@@ -16,14 +16,14 @@
 </p>
 
 
-<%= link_to 'Edit', edit_user_database_table_path(@current_user.id, @table.database_id, @table.id) %> |
-<%= link_to 'Back', user_database_table_path %>
+<%= link_to 'Edit', edit_database_table_path(@database, @table.id) %> |
+<%= link_to 'Back', database_table_path %>
 
 
 <% if @table.fields.any? %>
 <% @table.fields.each do |t|%>
-<h5><%=link_to(t.name, user_database_table_field_path(@current_user.id, @table.database_id, @table.id, t.id))%>:<%=t.fieldtype%></h5>
+<h5><%=link_to(t.name, database_table_field_path(@database.id, @table.id, t.id))%>:<%=t.fieldtype%></h5>
 <% end %>
 <% end %>
 
-# <%=link_to("New field?", new_user_database_table_field_path(@current_user.id, @table.database_id, @table.id))%>
+# <%=link_to("New field?", new_database_table_field_path(@database.id, @table.id))%>

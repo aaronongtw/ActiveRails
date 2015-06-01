@@ -1,0 +1,4 @@
+<% User.all.each do |u| %>
+<h5><%= link_to(u.email, users_show_path(u))%></h5>
+<% end %>
+

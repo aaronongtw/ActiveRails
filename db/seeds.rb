@@ -15,9 +15,13 @@ User.destroy_all
 
 u1  = User.create :email => 'admin@site', :admin => true, :password => 'password'
 
-d1 = Database.create :name => 'Test Database', :tablenum => 1
+d1 = Database.create :name => 'Agriculture', :tablenum => 1
 
-t1 = Table.create :name => 'Test Table', :fieldnum => 2
+t1 = Table.create :name => 'Farm', :fieldnum => 2
+t3 = Table.create :name => 'Fruits', :fieldnum => 2
+t4 = Table.create :name => 'Vegetables', :fieldnum => 2
+t2 = Table.create :name => 'Farmer', :fieldnum => 2
+
 
 r1 = Relationship.create :name => 'has_one'
 r2 = Relationship.create :name => 'has_many'
@@ -26,14 +30,29 @@ r4 = Relationship.create :name => 'has_many :through'
 r5 = Relationship.create :name => 'belongs_to'
 r6 = Relationship.create :name => 'has_and_belongs_to_many'
 
-f1 = Field.create( :name => 'hello', :fieldtype => "string"  )
-f2 = Field.create( :name => 'age', :fieldtype => "integer"  )
+f1 = Field.create( :name => 'name', :fieldtype => "string"  )
+f2 = Field.create( :name => 'location', :fieldtype => "string"  )
+
+f3 = Field.create( :name => 'name', :fieldtype => "string"  )
+f4 = Field.create( :name => 'age', :fieldtype => "integer"  )
+
+f5 = Field.create( :name => 'name', :fieldtype => "string"  )
+f6 = Field.create( :name => 'fruittype', :fieldtype => "string"  )
+
+f7 = Field.create( :name => 'name', :fieldtype => "string"  )
+f8 = Field.create( :name => 'vegetabletype', :fieldtype => "string"  )
+
+
+
+t2.fields << f3 << f4
 
 t1.relationships << r1 << r2 << r3 << r4 << r5 << r6
-t1.fields << f1
+t1.fields << f1 << f2
+t3.fields << f5 << f6
+t4.fields << f7 << f8
 
 u1.databases << d1
-d1.tables << t1 
+d1.tables << t1 << t2 << t3 << t4
 
 
 

@@ -1,4 +1,4 @@
-<%= form_for(@field) do |f| %>
+<%= form_for [@database, @table, @field] do |f| %>
 
   <% if @field.errors.any? %>
     <div id="error_explanation">
@@ -20,7 +20,7 @@
     <%= f.select :fieldtype, ['primary_key', 'string', 'text','integer','float','decimal','datetime','timestamp','time','date','binary','boolean'] %>
   </div>
   <div class="hide">
-    <%= f.text_field :table_id, :value => params[:dbid] %>
+    <%= f.text_field :table_id, :value => @table.id %>
   </div>
   <div class="actions">
     <%= f.submit %>

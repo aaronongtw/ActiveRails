@@ -1,8 +1,7 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1><%= @current_user.email%></h1>
 
 <% @user.databases.each do |d| %>
-  <h4><%= link_to(d.name, "/users/#{@user.id}/databases/#{d.id}" ) %></h4>
+  <h4><%= link_to(d.name, "/databases/#{d.id}" ) %></h4>
   <% end %>
 
 

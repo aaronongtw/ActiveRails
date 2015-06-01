@@ -1,6 +1,6 @@
 class TablesController < ApplicationController
   before_action :set_table, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_database
   # GET /tables
   # GET /tables.json
   def index
@@ -26,10 +26,11 @@ class TablesController < ApplicationController
   # POST /tables
   # POST /tables.json
   def create
+    
     @table = Table.new(table_params)
     respond_to do |format|
       if @table.save
-        format.html { redirect_to @table, notice: 'Table was successfully created.' }
+        format.html { redirect_to database_table_path(@database.id, @table.id), notice: 'Table was successfully created.' }
         format.json { render :show, status: :created, location: @table }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class TablesController < ApplicationController
   def update
     respond_to do |format|
       if @table.update(table_params)
-        format.html { redirect_to @table, notice: 'Table was successfully updated.' }
+        format.html { redirect_to database_path(@database.id), notice: 'Table was successfully updated.' }
         format.json { render :show, status: :ok, location: @table }
       else
         format.html { render :edit }
@@ -66,6 +67,10 @@ class TablesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_table
       @table = Table.find(params[:id])
+    end
+
+    def set_database
+      @database = Database.find(params[:database_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

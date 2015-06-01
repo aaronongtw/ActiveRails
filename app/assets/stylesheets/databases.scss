@@ -1,10 +1,22 @@
 // Place all the styles related to the Databases controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.databasecanvas {
+  max-width:800px;
+  margin:0px auto;
+  text-align: center;
+}
+
 .mTable {
   border: 1px solid black;
-  padding: 0px 10px 5px 10px;
+  padding: 0px 10px 5px 10px;  
+}
+
+.mBox {
   max-width: 200px;
+  display:inline-block;
+  margin: 20px 20px 20px 20px;
+  border: 1px solid black;
 }
 
 

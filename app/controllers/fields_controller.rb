@@ -1,6 +1,6 @@
 class FieldsController < ApplicationController
   before_action :set_field, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_database, :set_table
   # GET /fields
   # GET /fields.json
   def index
@@ -27,7 +27,7 @@ class FieldsController < ApplicationController
     @field = Field.new(field_params)
     respond_to do |format|
       if @field.save
-        format.html { redirect_to @field, notice: 'Field was successfully created.' }
+        format.html { redirect_to database_table_field_path(@database.id, @table.id, @field.id), notice: 'Field was successfully created.' }
         format.json { render :show, status: :created, location: @field }
       else
         format.html { render :new }
@@ -64,6 +64,12 @@ class FieldsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_field
       @field = Field.find(params[:id])
+    end
+    def set_database
+      @database = Database.find(params[:database_id])
+    end
+    def set_table
+      @table = Table.find(params[:table_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

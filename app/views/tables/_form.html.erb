@@ -1,5 +1,4 @@
-
-<%= form_for(@database, @table) do |f| %>
+<%= form_for [@database, @table] do |f| %>
   <% if @table.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@table.errors.count, "error") %> prohibited this table from being saved:</h2>
@@ -30,9 +29,8 @@
   </div>
 
   <div class="hide">
-  <% if params[:dbid].present? %>
-  <%= f.text_field :database_id, :value => params[:dbid]%>
-  <% end %>
+  <%= f.text_field :database_id, :value => @database.id %>
+  
   </div>
   <div class="actions">
     <%= f.submit %>
