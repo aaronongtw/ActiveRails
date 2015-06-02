@@ -21,7 +21,7 @@
     </div>
   <div class="field">
     <%= f.label "Relative Name: "%>
-    <%=f.select(:relativename , Table.all.collect {|t| t.name }, {include_blank: 'None'})%>
+    <%=f.select(:relativename , @database.tables.collect {|t| t.name }, {include_blank: 'None'})%>
   </div>
 
   <div class="hide">

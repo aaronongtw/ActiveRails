@@ -28,6 +28,10 @@ nav li a {
   margin-right: 50px;
 }
 
+nav ul {
+  padding: 0px;
+}
+
 .container {
   margin:0 px auto;
   text-align: center;

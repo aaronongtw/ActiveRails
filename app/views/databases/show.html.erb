@@ -30,11 +30,11 @@
     </div>   
     </div>
   <% end %>
-  
+   <div class="mBox floatcreate"><h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %><i class="fa fa-plus-square-o"></i></h4></div>
   </div>
 <% end %>
-<h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %><i class="fa fa-plus-square-o"></i></h4>
-<form action="/generator/<%=@database.id%>">
+
+<form action="/generator/<%=@database.id%>" class="formfloat">
   <label for="fname">File Name</label>
   <input id="fname" name="fname" type="text">
   <button>GENERATE</button>      

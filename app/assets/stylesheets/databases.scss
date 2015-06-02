@@ -2,16 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #databasecanvas {
-  max-width:800px;
-  height: 500px;
+  max-width:900px;
   margin:0px auto;
   text-align: center;
+  padding:40px 40px 40px 40px;
 }
 
 .mTable {
   position: relative;
-  border: 1px solid black;
-   
   height: 100%;
   width: 100%;
 }
@@ -40,6 +38,19 @@
 
 .hide {
   visibility:hidden;
+}
+
+.floatcreate {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+}
+
+.formfloat {
+  border: 1px solid black;
+  position: fixed;
+  right: 20px;
+  bottom:20px;
 }
 
 .title {

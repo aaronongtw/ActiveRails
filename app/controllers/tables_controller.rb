@@ -30,7 +30,7 @@ class TablesController < ApplicationController
     @table = Table.new(table_params)
     respond_to do |format|
       if @table.save
-        format.html { redirect_to database_table_path(@database.id, @table.id), notice: 'Table was successfully created.' }
+        format.html { redirect_to database_path(@database.id), notice: 'Table was successfully created.' }
         format.json { render :show, status: :created, location: @table }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class TablesController < ApplicationController
   def destroy
     @table.destroy
     respond_to do |format|
-      format.html { redirect_to tables_url, notice: 'Table was successfully destroyed.' }
+      format.html { redirect_to database_path(@database.id), notice: 'Table was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

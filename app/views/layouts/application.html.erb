@@ -14,10 +14,11 @@
     <%== navhelp %> 
     </ul>
 </nav>
-<% if flash[:notice].present? %>
+
+  <div class="container">
+  <% if flash[:notice].present? %>
   <h2><%= flash[:notice]  %></h2>
   <% end %>
-  <div class="container">
 <%= yield %>
 </div>
 <script type="text/javascript" 

@@ -2,4 +2,5 @@
 
 <%= render 'form' %>
 
+<%= link_to 'Destroy', database_table_field_path, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Back', database_path(@database.id) %>
