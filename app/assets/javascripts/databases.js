@@ -2,26 +2,12 @@ $(document).ready(function() {
 
     jsPlumb.ready(function() {
 
-    
+
         jsPlumb.registerConnectionTypes({
             "basic": {
                 paintStyle: {
                     strokeStyle: "black",
                     lineWidth: 2
-                },
-                hoverPaintStyle: {
-                    strokeStyle: "red",
-                    lineWidth: 2
-                },
-                cssClass: "connector-normal"
-            },
-            "tomany": {
-                paintStyle: {
-                    strokeStyle: "black",
-                    lineWidth: 2
-                },
-                SourceendPointStyles: {
-
                 },
                 hoverPaintStyle: {
                     strokeStyle: "red",

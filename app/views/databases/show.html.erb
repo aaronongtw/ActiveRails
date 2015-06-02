@@ -6,7 +6,7 @@
 
 
 <div id="databasecanvas">
-<h2>Tables Created in <%=link_to(@database.name, edit_database_path)%> </h2> 
+<h2>Tables Created in <%=link_to(@database.name, edit_database_path)%>  <i class="fa fa-pencil"></i> </h2> 
 <% if @database.tables.any? %>
   <div class="mTable"><% @database.tables.each do |t|%> 
     <% if t.relation.nil? %>
@@ -18,19 +18,22 @@
       <% else %>
       <div class="related <%=t.relativename%> mBox" id="<%=t.name%>">
       <% end %>
-    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%> <%=t.relation%> <%=t.relativename%></h3>
+    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br><span><%=t.relation%> <%=t.relativename%></span></h3>
     <div class = "mField">
     <% t.fields.each do |f| %>
-      <h5>field  : <%=link_to(f.name+':'+f.fieldtype, "/databases/#{@database.id}/tables/#{t.id}/fields/#{f.id}/edit")%></h5>
+      <div class="fieldinfo">
+      <h5 class="field left"><%=link_to(f.name, "/databases/#{@database.id}/tables/#{t.id}/fields/#{f.id}/edit")%> | </h5>
+      <h5 class="field right"><%=f.fieldtype%></h5>
+      </div>
     <% end %> 
-      <h6><%= link_to('New Field',"/databases/#{@database.id}/tables/#{t.id}/fields/new")%></h6>
+      <h6><%= link_to('New Field',"/databases/#{@database.id}/tables/#{t.id}/fields/new")%><i class="fa fa-plus-square-o"></i></h6>
     </div>   
     </div>
   <% end %>
   
   </div>
 <% end %>
-<h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %></h4>
+<h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %><i class="fa fa-plus-square-o"></i></h4>
 <form action="/generator/<%=@database.id%>">
   <label for="fname">File Name</label>
   <input id="fname" name="fname" type="text">
