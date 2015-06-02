@@ -28,7 +28,7 @@ class TablesController < ApplicationController
   def create
     @table = Table.new(table_params)
     pluralizing = params[:table][:name]
-    @table.name = pluralizing.singularize
+    @table.name = pluralizing.singularize.split(' ').join
     respond_to do |format|
       if @table.save
         format.html { redirect_to database_path(@database.id), notice: 'Table was successfully created.' }
