@@ -36,4 +36,38 @@ nav ul {
   margin:0 px auto;
   text-align: center;
 }
+.tutorialcontain {
+  max-width: 700px;
+  text-align: left;
+  margin-bottom: 100px;
+  margin-left: 150px;
+}
 
+.tutorialcontain li {
+  margin-top: 2em;
+}
+.commandlines {
+  background-color: black;
+  color: white;
+  font-family: monospace;
+}
+ul {
+  list-style: none;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.typebox {
+  border: 1px solid black;
+  font-family: monospace;
+  background-color: #F1F1F1;
+}
+.typebox span{
+  color: #2060A0;
+}
+span {
+  color:red;
+}
+.note {
+  font-size: 70%;
+}

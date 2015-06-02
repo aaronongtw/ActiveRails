@@ -1,0 +1,79 @@
+<h2>Tutorial for <%=@database.name%></h2>
+
+<h3>Using Scaffold(Fast)
+<h6>'generate' and 'g' are interchangable</h6>
+<div class="tutorialcontain">
+<ol>
+<li>Set up your Rails app. Refer to ____ for more info</li>
+<li>Change directory into your rails app in console.</li>
+<li>Run the following commands</li>
+  <div class="commandlines"> <ul>
+  <%@database.tables.each do |table|%>
+  <li>$ rails generate scaffold <%=table.name%> 
+    <%table.fields.each do |field|%>
+      <%=field.name%>:<%=field.fieldtype%>
+      <% end %></li><% end %></ul>
+  </div>
+
+<% if @database.tables.pluck(:relativename).any? %>
+  <li> Now you will need to go into your "app/models" folder in your rails app.
+  
+  <% @database.tables.pluck(:name, :relation, :relativename).each do |relationship| %>
+    <li> In <%=relationship[0]%>.rb</li>
+    <div class="typebox">
+    <ul>
+    <li><span>class</span> Database &#60; ActiveRecord::Base</li>
+    <li>&nbsp;&nbsp;&nbsp;<%=relationship[1]%> :<%=relationship[2]%></li>
+    <li><span>end</span></li>
+    </ul>
+    </div>
+    <p class="note"> *note that if a relationship has already been specified, just add the <span><%=relationship[1]%> :<%=relationship[2]%></span> part in the next line</p>
+    <li>Likewise, you have to connect in <%=relationship[2]%>.rb.</li>
+    <div class="typebox">
+    <ul>
+    <li><span>class</span> Database &#60; ActiveRecord::Base</li>
+    <li>&nbsp;&nbsp;&nbsp;<%=
+    case relationship[1]
+      when "has_one"
+        "has_one"
+      when "has_many"
+        "belongs_to"
+      when "belongs_to"
+        "has_many"
+      else 
+        "TO BE ADDED IN FUTURE"
+      end%> :<%=relationship[0]%></li>
+    <li><span>end</span></li>
+    </ul>
+    </div>
+    <p class="note"> *note that if a relationship has already been specified, just add the <span>||INVERSE RELATIONSHIP HERE || :<%=relationship[0]%></span> part in the next line. Also be mindful of the pluralization of the table. If it has one, it has to be singular. If it has many, it has to be plural.</p>
+  <% end %>
+<% end %>
+
+<li>Once that is done, run a rake create migrate and seed(only if you have seed data)
+</li>
+<div class="commandlines">
+    <ul>
+    <li>$ rake db:create</li>
+    <li>$ rake db:migrate</li>
+    <li>$ rake db:seed ##DO THIS ONLY IF YOU HAVE SEED DATA##</li>
+    </ul>
+  </div> 
+
+<li>To test that it all works. Try annotate. If you do not have the annotate gem. You can install that typing this in your command line.</li>
+  <div class="commandlines">
+    <ul><li>$ gem install annotate</li></ul>
+  </div> 
+ <li>Run annotate in command line.</li>
+  <div class="commandlines">
+    <ul><li>$ annotate</li></ul>
+  </div> 
+  <li>It Should Return</li>
+<div class="commandlines">
+    <ul><li>$ Annotated (<%=@database.tables.length%>): 
+    <% @database.tables.each do |table|%>
+    <%=table.name%>, <% end %></li></ul>
+  </div> 
+  <li>Well Done, you have set up a basic database on Rails. </li>
+  </ol>
+</div>

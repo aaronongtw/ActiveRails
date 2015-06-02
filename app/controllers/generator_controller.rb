@@ -6,6 +6,10 @@ class GeneratorController < ApplicationController
   def index
   end
 
+  def tutorial
+    @database = Database.find(params[:id])
+  end
+
   private
   def database_params
   params.require(:relationship).permit(:name, :database_id)

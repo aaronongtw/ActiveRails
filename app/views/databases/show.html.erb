@@ -30,16 +30,22 @@
     </div>   
     </div>
   <% end %>
-   <div class="mBox floatcreate"><h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %><i class="fa fa-plus-square-o"></i></h4></div>
+
   </div>
 <% end %>
-
-<form action="/generator/<%=@database.id%>" class="formfloat">
+<div class="mBox floatcreate"><h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %><i class="fa fa-plus-square-o"></i></h4></div>
+<div class="formfloat">
+<form action="/generator/<%=@database.id%>">
   <label for="fname">File Name</label>
-  <input id="fname" name="fname" type="text">
-  <button>GENERATE</button>      
+  <input id="fname" name="fname" type="text"><br>
+  <button>GENERATE RUBY FILE</button>      
+</form>
+<form action="/generator/tutorial/<%=@database.id%>">
+<button>GENERATE TUTORIAL</button>
 </form>
 </div>
+</div>
+
 
 
  

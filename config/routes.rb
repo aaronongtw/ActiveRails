@@ -78,5 +78,6 @@ Rails.application.routes.draw do
   resources :relationships
   root :to => 'generator#index'
   get '/generator/:id' => 'generator#create'
+  get '/generator/tutorial/:id' => 'generator#tutorial'
 
 end
