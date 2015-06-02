@@ -18,7 +18,7 @@
       <% else %>
       <div class="related <%=t.relativename%> mBox" id="<%=t.name%>">
       <% end %>
-    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br><span><%=t.relation%> <%=t.relativename%></span></h3>
+    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br><span class="relationspan"><span class="relativespan"><%=t.relation%> <%=t.relativename%></span></span></h3>
     <div class = "mField">
     <% t.fields.each do |f| %>
       <div class="fieldinfo">
