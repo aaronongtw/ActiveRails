@@ -1,6 +1,9 @@
 class GeneratorController < ApplicationController
-  def index
+  def create
     generate_file
+  end
+
+  def index
   end
 
   private

@@ -19,7 +19,7 @@ d1 = Database.create :name => 'Agriculture', :tablenum => 1
 
 t1 = Table.create :name => 'Farm', :fieldnum => 2
 t3 = Table.create :name => 'Fruits', :fieldnum => 2
-t4 = Table.create :name => 'Vegetables', :fieldnum => 2
+t4 = Table.create :name => 'Pesticides', :fieldnum => 2
 t2 = Table.create :name => 'Farmer', :fieldnum => 2
 
 
@@ -40,7 +40,7 @@ f5 = Field.create( :name => 'name', :fieldtype => "string"  )
 f6 = Field.create( :name => 'fruittype', :fieldtype => "string"  )
 
 f7 = Field.create( :name => 'name', :fieldtype => "string"  )
-f8 = Field.create( :name => 'vegetabletype', :fieldtype => "string"  )
+f8 = Field.create( :name => 'chemicals', :fieldtype => "string"  )
 
 
 

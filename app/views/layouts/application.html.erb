@@ -16,7 +16,14 @@
 <% if flash[:notice].present? %>
   <h2><%= flash[:notice]  %></h2>
   <% end %>
+  <div class="container">
 <%= yield %>
-
+</div>
+<script type="text/javascript" 
+     src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js">
+  </script>
+  <script type="text/javascript" 
+     src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js">
+  </script>
 </body>
 </html>

@@ -1,0 +1,13 @@
+<% if @current_user %>
+  <% @current_user.databases.each do |d| %>
+  <%= link_to(d.name, d)%>
+  <% end %>
+
+  <%= link_to("New Database", new_database_path)%>
+
+<% else %>
+  <h3> Please Log In or Sign Up to use OttoDD </h3>
+
+
+
+<% end %>

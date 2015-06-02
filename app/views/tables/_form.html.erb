@@ -16,10 +16,6 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :fieldnum %><br>
-    <%= f.number_field :fieldnum%>
-  </div>
-  <div class="field">
     <%= f.label "Relation: " %>
     <%= f.select(:relation , Relationship.all.collect {|r| r.name}, {include_blank: 'None'})%>
     </div>

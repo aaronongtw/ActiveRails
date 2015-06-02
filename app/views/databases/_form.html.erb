@@ -15,12 +15,8 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label "Number of Tables" %><br>
-    <%= f.number_field :tablenum %>
-  </div>
   <div class="hide">
-    <%= f.text :user_id value= @current_user%>
+    <%= f.text_field :user_id, :value => @current_user.id%>
     </div>
   <div class="actions">
     <%= f.submit %>
