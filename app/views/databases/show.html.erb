@@ -16,9 +16,20 @@
       <div class="mBox"> 
       <% end %>
       <% else %>
+      <% if t.relation == "has_and_belongs_to_many" %>
+      <div class="related <%=t.relativename%> mBox" id="relBox<%=t.name%>">
+      <%= [t.relativename,t.name].sort.join() %>
+      <div class="mField">
+        <div class="fieldinfo relationfield"><h5>
+        <%= t.relativename%>_id<br><%=t.name%>_id</h5></div>
+      </div>
+      </div>
+      <div class="related relBox<%=t.name%> mBox" id="<%=t.name%>">
+      <% else %>
       <div class="related <%=t.relativename%> mBox" id="<%=t.name%>">
       <% end %>
-    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br><span class="relationspan"><span class="relativespan"><%=t.relation%> <%=t.relativename%></span></span></h3>
+      <% end %>
+    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br><span class="relationspan"><span class="relativespan"><%=t.relation%> <%=t.relativename%></span></span></h3> 
     <div class = "mField">
     <% t.fields.each do |f| %>
       <div class="fieldinfo">
