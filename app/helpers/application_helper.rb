@@ -5,6 +5,8 @@ module ApplicationHelper
     if @current_user.present? && @current_user.admin?
       nav += '<li>' + link_to('Show Users', users_path) + '</li>'
       nav += '<li>' + link_to('View Relationships', relationships_path) + '</li>'
+      nav += '<li>' + link_to('View Databases', databases_path) + '</li>'
+      
     end
 
     if @current_user.present?
