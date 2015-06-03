@@ -1,7 +1,7 @@
 <h2>Tutorial for <%=@database.name%></h2>
 
 <h3>Using Scaffold(Fast)
-<h6>'generate' and 'g' are interchangable</h6>
+
 <div class="tutorialcontain">
 <ol>
 <li>Set up your Rails app. Refer to ____ for more info</li>
@@ -18,7 +18,7 @@
       <% end %>
       <% end %></ul>
   </div>
-
+<p class="note">'generate' and 'g' are interchangable</p>
 <% if @database.tables.pluck(:relativename).any? %>
   <li> Now you will need to go into your "app/models" folder in your rails app.
   
@@ -60,7 +60,7 @@
     <ul>
     <li>$ rake db:create</li>
     <li>$ rake db:migrate</li>
-    <li>$ rake db:seed ##DO THIS ONLY IF YOU HAVE SEED DATA##</li>
+    <li>$ rake db:seed</li>
     </ul>
   </div> 
 
