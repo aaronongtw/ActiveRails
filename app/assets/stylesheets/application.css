@@ -44,17 +44,19 @@ nav ul {
 }
 
 .tutorialcontain li {
-  margin-top: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 .commandlines {
   background-color: black;
   color: white;
   font-family: monospace;
+  box-shadow: 0 0 5px black;
 }
 ul {
   list-style: none;
   padding-left: 10px;
-  padding-top: 10px;
+  padding-top: 10px; 
   padding-bottom: 10px;
 }
 .typebox {

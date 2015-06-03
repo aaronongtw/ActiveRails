@@ -29,7 +29,13 @@
       <div class="related <%=t.relativename%> mBox" id="<%=t.name%>">
       <% end %>
       <% end %>
-    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br><span class="relationspan"><span class="relativespan"><%=t.relation%> <%=t.relativename%></span></span></h3> 
+    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br><span class="relationspan"><span class="relativespan"><% if t.relativename.present? %><%=t.relation%> :
+    <% if t.relation.include? "many" %>
+    <%= t.relativename.pluralize %>
+    <% else %>
+    <%= t.relativename %>
+    <% end %>
+      <% end %></span></span></h3> 
     <div class = "mField">
     <% t.fields.each do |f| %>
       <div class="fieldinfo">
