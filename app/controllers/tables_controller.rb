@@ -76,6 +76,6 @@ class TablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def table_params
-      params.require(:table).permit(:name, :database_id, :fieldnum, :relativename, :relation)
+      params.require(:table).permit(:name, :database_id, :fieldnum, :relativename, :relation, :through)
     end
 end

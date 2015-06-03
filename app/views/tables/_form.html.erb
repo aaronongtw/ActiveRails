@@ -23,7 +23,10 @@
     <%= f.label "Relative Name: "%>
     <%=f.select(:relativename , @database.tables.collect {|t| t.name }, {include_blank: 'None'})%>
   </div>
-
+    <div class="field">
+    <%= f.label "Through: "%>
+    <%=f.select(:through , @database.tables.collect {|t| t.name }, {include_blank: 'None'})%>
+  </div>
   <div class="hide">
   <%= f.text_field :database_id, :value => @database.id %>
   

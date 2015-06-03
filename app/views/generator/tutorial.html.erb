@@ -22,16 +22,33 @@
 <% if @database.tables.pluck(:relativename).any? %>
   <li> Now you will need to go into your "app/models" folder in your rails app.
   
-  <% @database.tables.pluck(:name, :relation, :relativename).each do |relationship| %>
+  <% @database.tables.pluck(:name, :relation, :relativename, :through).each do |relationship| %>
+  <% relationship[0] = relationship[0].downcase %>
+  <% relationship[2] = relationship[2].downcase %>
+  <% if relationship[3].present? %>
+  <% relationship[3] = relationship[3].downcase %>
+  <% end %>
     <li> In <%=relationship[0]%>.rb</li>
     <div class="typebox">
     <ul>
-    <li><span>class</span> <%=relationship[0]%> &#60; ActiveRecord::Base</li>
+    <li><span>class</span> <%=relationship[0].capitalize%> &#60; ActiveRecord::Base</li>
+    <% if relationship[1].include?  "through" %>
+    <li>&nbsp;&nbsp;&nbsp;
+    <%=relationship[1].split(' ')[0]%> 
+    <% if relationship[1].include? "many" %>
+    :<%= relationship[2].pluralize %>,
+    <% else %>
+    :<%=relationship[2]%>,
+    <% end %>
+    <%=relationship[1].split(' ')[1]%> 
+    => :<%=relationship[3].pluralize%>
+    <% else %>
     <li>&nbsp;&nbsp;&nbsp;<%=relationship[1]%>
     <% if relationship[1].include? "many" %>
     :<%= relationship[2].pluralize %>
     <% else %>
     :<%=relationship[2]%>
+    <% end %>
     <% end %>
     </li>
     <li><span>end</span></li>
@@ -39,9 +56,10 @@
     </div>
     <p class="note"> *note that if a relationship has already been specified, include in the next line</p>
     <li>Likewise, you have to connect in <%=relationship[2]%>.rb.</li>
+    <% if relationship[3].nil? %>
     <div class="typebox">
     <ul>
-    <li><span>class</span> <%=relationship[2]%> &#60; ActiveRecord::Base</li>
+    <li><span>class</span> <%=relationship[2].capitalize%> &#60; ActiveRecord::Base</li>
     <li>&nbsp;&nbsp;&nbsp;<%=
     case relationship[1]
       when "has_one"
@@ -50,13 +68,13 @@
         "belongs_to :#{relationship[0]}"
       when "belongs_to"
         "has_many :#{relationship[0].pluralize}"
-      else "has_and_belongs_to_many"
+      when "has_and_belongs_to_many"
         "has_and_belongs_to_many :#{relationship[0].pluralize}"
       end%></li>
     <li><span>end</span></li>
     </ul>
     </div>
-
+  <% end %>
   <% end %>
 <% end %>
 

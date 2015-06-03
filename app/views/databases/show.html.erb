@@ -29,12 +29,23 @@
       <div class="related <%=t.relativename%> mBox" id="<%=t.name%>">
       <% end %>
       <% end %>
-    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br><span class="relationspan"><span class="relativespan"><% if t.relativename.present? %><%=t.relation%> :
+    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br>
+    <span class="relationspan"><span class="relativespan"><% if t.relativename.present? %>
+    <% if t.relation.include? "through" %>
+      <%= t.relation.split(' ')[0]%> :<%=t.relativename%> <br><%=t.relation.split(' ')[1]%> 
+      <%if t.through.present?%>
+      <%=t.through%>  
+      <% else %>
+      <span style='color: red;'>MISSING THROUGH</span>
+      <% end %>
+    <% else %>
+    <%=t.relation%> :
     <% if t.relation.include? "many" %>
     <%= t.relativename.pluralize %>
     <% else %>
     <%= t.relativename %>
     <% end %>
+      <% end %>
       <% end %></span></span></h3> 
     <div class = "mField">
     <% t.fields.each do |f| %>
