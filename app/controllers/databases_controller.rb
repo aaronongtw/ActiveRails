@@ -28,7 +28,6 @@ class DatabasesController < ApplicationController
   # POST /databases.json
   def create
     @database = Database.new(database_params)
-
     respond_to do |format|
       if @database.save
         format.html { redirect_to @database, notice: 'Database was successfully created.' }
@@ -72,7 +71,7 @@ class DatabasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def database_params
-      params.require(:database).permit(:name, :tablenum)
+      params.require(:database).permit(:name, :tablenum, :user_id)
     end
 
     def check_if_admin
