@@ -12,7 +12,11 @@
   <li>$ rails generate scaffold <%=table.name%> 
     <%table.fields.each do |field|%>
       <%=field.name%>:<%=field.fieldtype%>
-      <% end %></li><% end %></ul>
+      <% end %></li>
+      <% if table.relation == "has_and_belongs_to_many" %>
+      <li>$ rails generate migration create_<%= [table.name,table.relativename].sort.join('_')%> <%=table.name%>_id:integer <%=table.relativename%>_id:integer</li>
+      <% end %>
+      <% end %></ul>
   </div>
 
 <% if @database.tables.pluck(:relativename).any? %>
@@ -22,7 +26,7 @@
     <li> In <%=relationship[0]%>.rb</li>
     <div class="typebox">
     <ul>
-    <li><span>class</span> Database &#60; ActiveRecord::Base</li>
+    <li><span>class</span> <%=relationship[0]%> &#60; ActiveRecord::Base</li>
     <li>&nbsp;&nbsp;&nbsp;<%=relationship[1]%> :<%=relationship[2]%></li>
     <li><span>end</span></li>
     </ul>
@@ -31,7 +35,7 @@
     <li>Likewise, you have to connect in <%=relationship[2]%>.rb.</li>
     <div class="typebox">
     <ul>
-    <li><span>class</span> Database &#60; ActiveRecord::Base</li>
+    <li><span>class</span> <%=relationship[2]%> &#60; ActiveRecord::Base</li>
     <li>&nbsp;&nbsp;&nbsp;<%=
     case relationship[1]
       when "has_one"
@@ -40,8 +44,8 @@
         "belongs_to"
       when "belongs_to"
         "has_many"
-      else 
-        "TO BE ADDED IN FUTURE"
+      else "has_and_belongs_to_many"
+        "has_and_belongs_to_many"
       end%> :<%=relationship[0]%></li>
     <li><span>end</span></li>
     </ul>
