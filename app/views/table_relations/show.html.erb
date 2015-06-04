@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Table origin:</strong>
+  <%= @table_relation.table_origin %>
+</p>
+
+<p>
+  <strong>Relationship:</strong>
+  <%= @table_relation.relationship %>
+</p>
+
+<p>
+  <strong>Through:</strong>
+  <%= @table_relation.through %>
+</p>
+
+<p>
+  <strong>Table to:</strong>
+  <%= @table_relation.table_to %>
+</p>
+
+<%= link_to 'Edit', edit_table_relation_path(@table_relation) %> |
+<%= link_to 'Back', table_relations_path %>

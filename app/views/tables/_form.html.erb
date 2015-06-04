@@ -15,18 +15,25 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label "Relation: " %>
-    <%= f.select(:relation , Relationship.all.collect {|r| r.name}, {include_blank: 'None'})%>
-    </div>
-  <div class="field">
-    <%= f.label "Relative Name: "%>
-    <%=f.select(:relativename , @database.tables.collect {|t| t.name }, {include_blank: 'None'})%>
-  </div>
-    <div class="field">
-    <%= f.label "Through: "%>
-    <%=f.select(:through , @database.tables.collect {|t| t.name }, {include_blank: 'None'})%>
-  </div>
+  <% if @table.table_relations.any? %>
+  <% @table.table_relations.each do |tr| %>
+  <%= link_to( tr.relationship,  edit_database_table_table_relation_path(@database.id, @table.id, tr.id)) %>
+    <% if tr.relationship.include? "many" %>
+    :<%= tr.table_to.pluralize %>
+    <% else %>
+    :<%= tr.table_to %>
+    <% end %>
+  <% if tr.through.present? && (tr.relationship.include? "through") %>
+  <%= tr.through%>
+  <% end %>
+  <br>
+  <% end %>
+  <% end %><br>
+
+  <% if @table.id.present? %>
+  <%= link_to("Add new Relationship", new_database_table_table_relation_path(@database.id, @table.id))%>
+  <% end %>
+
   <div class="hide">
   <%= f.text_field :database_id, :value => @database.id %>
   

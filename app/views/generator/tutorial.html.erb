@@ -19,64 +19,69 @@
       <% end %></ul>
   </div>
 <p class="note">'generate' and 'g' are interchangable</p>
-<% if @database.tables.pluck(:relativename).any? %>
-  <li> Now you will need to go into your "app/models" folder in your rails app.
-  
-  <% @database.tables.pluck(:name, :relation, :relativename, :through).each do |relationship| %>
-  <% relationship[0] = relationship[0].downcase %>
-  <% relationship[2] = relationship[2].downcase %>
-  <% if relationship[3].present? %>
-  <% relationship[3] = relationship[3].downcase %>
-  <% end %>
-    <li> In <%=relationship[0]%>.rb</li>
+  <% @database.tables.each do |t| %>
+  <% if t.table_relations[0].present? %>
+  <li> In <%=t.name%>.rb</li>
     <div class="typebox">
     <ul>
-    <li><span>class</span> <%=relationship[0].capitalize%> &#60; ActiveRecord::Base</li>
-    <% if relationship[1].include?  "through" %>
+    <li><span>class</span> <%=t.name.capitalize%> &#60; ActiveRecord::Base</li>
+  
+  <% t.table_relations.each do |r| %>
+  <% t.name = t.name.downcase %>
+  <% r.table_to = r.table_to.downcase %>
+  <% if r.through.present? %>
+  <% r.through = r.through.downcase %>
+  <% end %>
+    <% if r.relationship.include?  "through" %>
     <li>&nbsp;&nbsp;&nbsp;
-    <%=relationship[1].split(' ')[0]%> 
-    <% if relationship[1].include? "many" %>
-    :<%= relationship[2].pluralize %>,
+    <%=r.relationship.split(' ')[0]%> 
+    <% if r.relationship.include? "many" %>
+    :<%= r.table_to.pluralize %>,
     <% else %>
-    :<%=relationship[2]%>,
+    :<%=r.table_to%>,
     <% end %>
-    <%=relationship[1].split(' ')[1]%> 
-    => :<%=relationship[3].pluralize%>
+    <%=r.relationship.split(' ')[1]%> 
+    => :<%=r.through.pluralize%>
     <% else %>
-    <li>&nbsp;&nbsp;&nbsp;<%=relationship[1]%>
-    <% if relationship[1].include? "many" %>
-    :<%= relationship[2].pluralize %>
+    <li>&nbsp;&nbsp;&nbsp;<%=r.relationship%>
+    <% if r.relationship.include? "many" %>
+    :<%= r.table_to.pluralize %>
     <% else %>
-    :<%=relationship[2]%>
+    :<%=r.table_to%>
+    <% end %>
     <% end %>
     <% end %>
     </li>
     <li><span>end</span></li>
     </ul>
+    
     </div>
-    <p class="note"> *note that if a relationship has already been specified, include in the next line</p>
-    <li>Likewise, you have to connect in <%=relationship[2]%>.rb.</li>
-    <% if relationship[3].nil? %>
+    <% end %>
+    <% t.table_relations.each do |r| %>
+    <% if r.relationship.include? 'through' %>
+    <% else %>
+    <li>Likewise, you have to establish the connection in <%=r.table_to%>.rb.</li>
+    
     <div class="typebox">
     <ul>
-    <li><span>class</span> <%=relationship[2].capitalize%> &#60; ActiveRecord::Base</li>
+    <li><span>class</span> <%=r.table_to.capitalize%> &#60; ActiveRecord::Base</li>
     <li>&nbsp;&nbsp;&nbsp;<%=
-    case relationship[1]
+    case r.relationship
       when "has_one"
-        "has_one :#{relationship[0]}"
+        "has_one :#{t.name}"
       when "has_many"
-        "belongs_to :#{relationship[0]}"
+        "belongs_to :#{t.name}"
       when "belongs_to"
-        "has_many :#{relationship[0].pluralize}"
+        "has_many :#{t.name.pluralize}"
       when "has_and_belongs_to_many"
-        "has_and_belongs_to_many :#{relationship[0].pluralize}"
+        "has_and_belongs_to_many :#{t.name.pluralize}"
       end%></li>
     <li><span>end</span></li>
     </ul>
     </div>
   <% end %>
   <% end %>
-<% end %>
+  <% end %>
 
 <li>Once that is done, run a rake create migrate and seed(only if you have seed data)
 </li>

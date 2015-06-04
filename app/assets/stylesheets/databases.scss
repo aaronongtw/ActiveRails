@@ -1,11 +1,15 @@
 // Place all the styles related to the Databases controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// 
+
+
 #databasecanvas {
   max-width:900px;
+  max-height:100vh;
   margin:0px auto;
   text-align: center;
-  padding:40px 40px 40px 40px;
+  padding:0px 40px 40px 40px;
 }
 
 .mTable {
@@ -44,6 +48,8 @@
   position: fixed;
   left: 20px;
   bottom: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .formfloat {
@@ -71,7 +77,7 @@ h3 span{
 }
 
 
-.field {
+.dfield {
   display: inline-block;
 }
 
@@ -85,6 +91,19 @@ h3 span{
 .relationfield h5 {
   margin:0px;
 }
+
+.related .relative {
+  overflow:auto;
+}
+
+.floatcreate h5 {
+  margin: 2px;
+}
+.floatcreate h4 {
+  margin: 2px;
+}
+
+
 
 
 

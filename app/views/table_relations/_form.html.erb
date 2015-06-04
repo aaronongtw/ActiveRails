@@ -1,0 +1,34 @@
+<%= form_for [@database, @table, @table_relation] do |f| %>
+  <% if @table_relation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@table_relation.errors.count, "error") %> prohibited this table_relation from being saved:</h2>
+
+      <ul>
+      <% @table_relation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>  
+   <div class="field">
+    <%= f.label "relationship: " %>
+    <%= f.select(:relationship , Relationship.all.collect {|r| r.name}, {include_blank: 'None'})%>
+    </div>
+     <div class="field">
+       <div class="field">
+    <%= f.label "Relative Name: "%>
+    <%=f.select(:table_to , @database.tables.collect {|t| t.name }, {include_blank: 'None'})%>
+  </div>
+    <%= f.label "Through: "%>
+    <%=f.select(:through , @database.tables.collect {|t| t.name }, {include_blank: 'None'})%>
+  </div>
+    <div class="hide">
+    <%= f.text_field :table_id, :value => @table.id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+ 
+
+ 

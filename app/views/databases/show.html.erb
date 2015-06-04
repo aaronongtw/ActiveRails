@@ -8,60 +8,79 @@
 <div id="databasecanvas">
 <h2>Tables Created in <%=link_to(@database.name, edit_database_path)%>  <i class="fa fa-pencil"></i> </h2> 
 <% if @database.tables.any? %>
-  <div class="mTable"><% @database.tables.each do |t|%> 
-    <% if t.relation.nil? %>
-      <% if  Table.pluck(:relativename).member? t.name %>
-      <div class="relative mBox element" id="<%=t.name%>"> 
-      <% else %>
-      <div class="mBox"> 
-      <% end %>
-      <% else %>
-      <% if t.relation == "has_and_belongs_to_many" %>
-      <div class="related <%=t.relativename%> mBox" id="relBox<%=t.name%>">
-      <%= [t.relativename,t.name].sort.join() %>
-      <div class="mField">
-        <div class="fieldinfo relationfield"><h5>
-        <%= t.relativename%>_id<br><%=t.name%>_id</h5></div>
+  <% @database.tables.each do |t|%> 
+  <div class="mBox 1"> 
+  <% if t.table_relations.any? %>
+      <% t.table_relations.each do |tr| %>
+      <% if tr.relationship == "has_and_belongs_to_many" %>   
+      <div class="related relBox<%=t.name%>" id="<%=t.name%>">
       </div>
-      </div>
-      <div class="related relBox<%=t.name%> mBox" id="<%=t.name%>">
       <% else %>
-      <div class="related <%=t.relativename%> mBox" id="<%=t.name%>">
+      <div class="related <%=tr.table_to%>" id="<%=t.name%>">
+      </div>
       <% end %>
       <% end %>
+      <% else %>
+      <% if TableRelation.pluck(:table_to).member? t.name %>
+      <div class="relative" id="<%=t.name%>"> </div>
+      <% end %>
+      <% end %>
+
     <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br>
-    <span class="relationspan"><span class="relativespan"><% if t.relativename.present? %>
-    <% if t.relation.include? "through" %>
-      <%= t.relation.split(' ')[0]%> :<%=t.relativename%> <br><%=t.relation.split(' ')[1]%> 
-      <%if t.through.present?%>
-      <%=t.through%>  
+    
+    <span class="relationspan"><span class="relativespan"><% if t.table_relations.present? %>
+    <% t.table_relations.each do |tr| %>
+    <% if tr.relationship.include? "through" %>
+      <%= tr.relationship.split(' ')[0]%> :<%=tr.table_to%> <br><%=tr.relationship.split(' ')[1]%> 
+      <%if tr.through.present?%>
+      <%=tr.through%>  
       <% else %>
       <span style='color: red;'>MISSING THROUGH</span>
       <% end %>
     <% else %>
-    <%=t.relation%> :
-    <% if t.relation.include? "many" %>
-    <%= t.relativename.pluralize %>
+    <%=tr.relationship%> :
+    <% if tr.relationship.include? "many" %>
+    <%= tr.table_to.pluralize %>
     <% else %>
-    <%= t.relativename %>
+    <%= tr.table_to %>
     <% end %>
+      <% end %><br>
       <% end %>
       <% end %></span></span></h3> 
     <div class = "mField">
     <% t.fields.each do |f| %>
       <div class="fieldinfo">
-      <h5 class="field left"><%=link_to(f.name, "/databases/#{@database.id}/tables/#{t.id}/fields/#{f.id}/edit")%> | </h5>
-      <h5 class="field right"><%=f.fieldtype%></h5>
+      <h5 class="dfield left"><%=link_to(f.name, "/databases/#{@database.id}/tables/#{t.id}/fields/#{f.id}/edit")%> | </h5>
+      <h5 class="dfield right"><%=f.fieldtype%></h5>
       </div>
     <% end %> 
       <h6><%= link_to('New Field',"/databases/#{@database.id}/tables/#{t.id}/fields/new")%><i class="fa fa-plus-square-o"></i></h6>
     </div>   
     </div>
+    <% t.table_relations.each do |tr| %>
+      <% if tr.relationship == "has_and_belongs_to_many" %>
+      <div class="related <%=tr.table_to%> mBox" id="relBox<%=t.name%>">
+      <%= [tr.table_to,t.name].sort.join() %>
+      <div class="mField">
+        <div class="fieldinfo relationfield"><h5>
+        <%= tr.table_to%>_id<br><%=t.name%>_id</h5>
+      </div>
+      </div> 
+      </div> 
+      <% end %><% end %>
   <% end %>
 
   </div>
 <% end %>
-<div class="mBox floatcreate"><h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %><i class="fa fa-plus-square-o"></i></h4></div>
+<div class="floatcreate"><h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %><i class="fa fa-plus-square-o"></i></h4>
+<h5>Connector Type</h5>
+<select class="connector">
+<option>Straight</option>
+<option>Bezier</option>
+<option>Flowchart</option>
+</select>
+</div>
+
 <div class="formfloat">
 <form action="/generator/<%=@database.id%>">
   <label for="fname">File Name</label>

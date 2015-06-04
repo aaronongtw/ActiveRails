@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Table Relations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Table origin</th>
+      <th>Relationship</th>
+      <th>Through</th>
+      <th>Table to</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @table_relations.each do |table_relation| %>
+      <tr>
+        <td><%= table_relation.table_origin %></td>
+        <td><%= table_relation.relationship %></td>
+        <td><%= table_relation.through %></td>
+        <td><%= table_relation.table_to %></td>
+        <td><%= link_to 'Show', table_relation %></td>
+        <td><%= link_to 'Edit', edit_table_relation_path(table_relation) %></td>
+        <td><%= link_to 'Destroy', table_relation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Table relation', new_table_relation_path %>

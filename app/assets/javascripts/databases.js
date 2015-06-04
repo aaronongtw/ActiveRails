@@ -32,6 +32,7 @@ $(document).ready(function() {
 
 
         var connectionCreate = function() {
+            jsPlumb.detachEveryConnection();
             $('.related').each(function(i, obj) {
                 element0 = $(this).attr('class').split(' ')[1]
                 element1 = $(this).attr('id')
@@ -40,7 +41,9 @@ $(document).ready(function() {
                 jsPlumb.connect({
                     source: $("#" + element0),
                     target: $("#" + element1),
-                    type: "basic"
+                    type: "basic",
+                    Anchor: "Continuous",
+                    connector: $('.connector').val() // dymamically nearest position will be considered for endpoint
                 });
 
             });
@@ -48,7 +51,7 @@ $(document).ready(function() {
 
         connectionCreate()
 
-
+$('.connector').change(connectionCreate)
 
 
         $('.mBox').draggable({

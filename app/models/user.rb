@@ -5,6 +5,7 @@
 #  id              :integer          not null, primary key
 #  email           :string
 #  password_digest :string
+#  admin           :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
