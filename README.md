@@ -10,7 +10,7 @@ Creation of a basic crud system is often a simple and repetitive process. The in
 
 ## Use
 
-Go to ottaDD and generate a database there, you can either generate 
+Go to ottaDD and generate a database there, you can either generate a ruby file that you may run to generate your database or construct a custom tutorial.
 
 ## Future Plans
 
