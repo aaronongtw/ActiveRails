@@ -1,28 +1,17 @@
-== README
+##OttaDD
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ottadd.herokuapp.com
+The project allows users to visually design a database and implement it on their rails app. They could also generate a custom tutorial that will guide the user step by step to set up the whole database on rails. 
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Motivation
+
+Creation of a basic crud system is often a simple and repetitive process. The initial intention of the project was to be able to translate visual representation of a database into a function database system on Rails
+
+## Use
+
+Go to ottaDD and generate a database there, you can either generate 
+
+## Future Plans
+
+To be able to dynamically alter a running rails database through the ottaDD app.
