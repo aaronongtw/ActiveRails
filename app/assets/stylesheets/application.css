@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-html, body {
+.databases-show {
   max-height: 100vh;
   overflow: hidden;
 }

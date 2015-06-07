@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="<%= params[:controller] %>-<%= params[:action] %>">
 <head>
   <title>OttaDD</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body>
+<body class="<%= params[:controller] %>-<%= params[:action] %>">
 <nav>
     <ul>
     <li><%= link_to('Home', root_path) %></li>
