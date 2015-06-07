@@ -28,6 +28,7 @@ class TableRelationsController < ApplicationController
     @table_relation = TableRelation.new(table_relation_params)
     respond_to do |format|
       if @table_relation.save
+        auto_field
         format.html { redirect_to edit_database_table_path(@database, @table), notice: 'Table relation was successfully created.' }
         format.json { render :show, status: :created, location: @table_relation }
       else
@@ -74,6 +75,19 @@ class TableRelationsController < ApplicationController
     def set_database
       @database = Database.find(params[:database_id])
     end
+
+    def auto_field
+      if @table_relation.relationship == "has_many"
+          table_to_id = Table.where(:name => @table_relation.table_to)[0].id
+          table_to_field = @table.name + "_id"
+          Field.create({:table_id => table_to_id, :name => table_to_field, :fieldtype => "integer"})  
+      elsif @table_relation.relationship == "belongs_to"
+          table_to_id = @table.id
+          table_to_field = @table_relation.table_to + "_id"
+          Field.create({:table_id => table_to_id, :name => table_to_field, :fieldtype => "integer"})  
+      end
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def table_relation_params
