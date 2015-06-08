@@ -1,5 +1,5 @@
 class DatabasesController < ApplicationController
-  before_action :set_database, only: [:show, :edit, :update, :destroy]
+  before_action :set_database, :check_if_owner, only: [:show, :edit, :update, :destroy]
   before_action :check_if_admin, :only => [:index]
 
   # GET /databases
@@ -13,6 +13,11 @@ class DatabasesController < ApplicationController
   def show
     params[:database_id] = params[:id]
     @table = Table.new
+  end
+
+  def shareview
+    @database = Database.find(params[:database_id])
+      redirect_to root_path unless @database.user.email.hash.to_s != params[:auth]
   end
 
   # GET /databases/new
@@ -76,5 +81,9 @@ class DatabasesController < ApplicationController
 
     def check_if_admin
     redirect_to root_path unless @current_user.present? && @current_user.admin?
+  end
+
+    def check_if_owner
+    redirect_to root_path unless @current_user.present? && (@current_user.id == @database.user_id || @current_user.admin?)
   end
 end

@@ -10,6 +10,26 @@ class GeneratorController < ApplicationController
     @database = Database.find(params[:id])
   end
 
+  def qr
+    @database = Database.find(params[:id])
+    @auth = @current_user.email.hash
+    raise params.inspect
+    # @data_in_str = @database.name + "\n" 
+    # @database.tables.each do |t|
+    #  @data_in_str += t.name + ",["
+    #  t.table_relations.each do |tr|
+    #   @data_in_str += tr.relationship + ',' + tr.table_to + ',' + tr.through + '|'
+    # end
+    # @data_in_str += "],["
+    #  t.fields.each do |f|
+    #   @data_in_str += f.name + ':' + f.fieldtype + ','
+    # end
+    # @data_in_str += "]\n"
+    # end
+    @datapath = "http://ottadd.herokuapp.com/database/#{@database.id}/#{@auth}"
+    @qr = RQRCode::QRCode.new( @datapath, :size => 10, :level => :h )
+  end
+
   private
   def database_params
   params.require(:relationship).permit(:name, :database_id)

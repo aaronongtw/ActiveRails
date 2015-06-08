@@ -78,6 +78,7 @@ Rails.application.routes.draw do
   end
 
     resources :databases do
+      get '/:auth' => 'databases#shareview'
       resources :tables do    
         resources :table_relations
         resources :fields
@@ -89,5 +90,6 @@ Rails.application.routes.draw do
   root :to => 'generator#index'
   get '/generator/:id' => 'generator#create'
   get '/generator/tutorial/:id' => 'generator#tutorial'
+  get '/generator/qr/:id' => 'generator#qr'
 
 end

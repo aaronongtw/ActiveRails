@@ -1,6 +1,6 @@
 
 <div id="databasecanvas">
-<h2>Tables Created in <%=link_to(@database.name, edit_database_path)%>  <i class="fa fa-pencil"></i> </h2> 
+<h2>Tables Created in <%=@database.name%>  <i class="fa fa-pencil"></i> </h2> 
 <% if @database.tables.any? %>
   <% @database.tables.each do |t|%> 
   <div class="mBox 1"> 
@@ -20,7 +20,7 @@
       <% end %>
       <% end %>
 
-    <h3><%=link_to(t.name, "/databases/#{@database.id}/tables/#{t.id}/edit")%></i><br>
+    <h3><%=t.name%></i><br>
     
     <span class="relationspan"><span class="relativespan"><% if t.table_relations.present? %>
     <% t.table_relations.each do |tr| %>
@@ -44,11 +44,11 @@
     <div class = "mField">
     <% t.fields.each do |f| %>
       <div class="fieldinfo">
-      <h5 class="dfield left"><%=link_to(f.name, "/databases/#{@database.id}/tables/#{t.id}/fields/#{f.id}/edit")%> | </h5>
+      <h5 class="dfield left"><%=f.name%> | </h5>
       <h5 class="dfield right"><%=f.fieldtype%></h5>
       </div>
     <% end %> 
-      <h6><%= link_to('New Field',"/databases/#{@database.id}/tables/#{t.id}/fields/new")%><i class="fa fa-plus-square-o"></i></h6>
+      <h6><%='New Field'%><i class="fa fa-plus-square-o"></i></h6>
     </div>   
     </div>
     <% t.table_relations.each do |tr| %>
@@ -66,7 +66,7 @@
 
   </div>
 <% end %>
-<div class="floatcreate"><h4><%= link_to("Create New Table", new_database_table_path(params[:database_id])) %><i class="fa fa-plus-square-o"></i></h4>
+<div class="floatcreate">
 <h5>Connector Type</h5>
 <select class="connector">
 <option>Straight</option>

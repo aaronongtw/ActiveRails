@@ -27,7 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'haml'
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+gem 'rqrcode'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'remove_turbolinks'
