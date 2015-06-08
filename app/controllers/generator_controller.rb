@@ -13,7 +13,6 @@ class GeneratorController < ApplicationController
   def qr
     @database = Database.find(params[:id])
     @auth = @current_user.email.hash
-    raise params.inspect
     # @data_in_str = @database.name + "\n" 
     # @database.tables.each do |t|
     #  @data_in_str += t.name + ",["
