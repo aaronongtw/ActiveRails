@@ -17,7 +17,7 @@ class DatabasesController < ApplicationController
 
   def shareview
     @database = Database.find(params[:database_id])
-      redirect_to root_path unless @database.user.email.hash.to_i.abs.to_s != params[:auth].to_i.abs.to_s
+      redirect_to root_path unless @database.user.email.hash.to_i.abs.to_s == params[:auth].to_i.abs.to_s
   end
 
   # GET /databases/new
