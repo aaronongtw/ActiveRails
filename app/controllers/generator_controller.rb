@@ -26,7 +26,8 @@ class GeneratorController < ApplicationController
     # @data_in_str += "]\n"
     # end
     @datapath = "http://ottadd.herokuapp.com/databases/#{@database.id}/#{@auth}"
-    @qr = RQRCode::QRCode.new( @datapath, :size => 10, :level => :h )
+    raise params.inspect
+    @qr = RQRCode::QRCode.new( @datapath, :size => 13, :level => :h )
   end
 
   private
