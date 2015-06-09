@@ -54,7 +54,7 @@
     <% t.table_relations.each do |tr| %>
       <% if tr.relationship == "has_and_belongs_to_many" %>
       <div class="related <%=tr.table_to%> mBox" id="relBox<%=t.name%>">
-      <%= [tr.table_to,t.name].sort.join() %>
+      <%= [tr.table_to,t.name].sort.join('_') %>
       <div class="mField">
         <div class="fieldinfo relationfield"><h5>
         <%= tr.table_to%>_id<br><%=t.name%>_id</h5>
