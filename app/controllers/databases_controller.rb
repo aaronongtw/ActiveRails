@@ -17,9 +17,19 @@ class DatabasesController < ApplicationController
 
   def shareview
     @database = Database.find(params[:database_id])
-      redirect_to root_path unless @database.user.email.hash.to_i.abs.to_s == params[:auth].to_i.abs.to_s
+      if ((@database.user.email.hash.to_i) - 1).abs.to_s == params[:auth].to_i.abs.to_s 
+        redirect_to database_shareedit_path
+      elsif @database.user.email.hash.to_i.abs.to_s == params[:auth].to_i.abs.to_s
+        
+      else
+        redirect_to root_path
+      end
   end
 
+  def shareedit
+    @database = Database.find(params[:database_id])
+    @table = Table.new
+  end
   # GET /databases/new
   def new
     @database = Database.new

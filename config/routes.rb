@@ -13,6 +13,8 @@
 #                                    PATCH  /users/:id(.:format)                                                        users#update
 #                                    PUT    /users/:id(.:format)                                                        users#update
 #                                    DELETE /users/:id(.:format)                                                        users#destroy
+#                                    GET    /databases/:database_id/:auth(.:format)                                     databases#shareview
+#                 database_shareedit GET    /databases/:database_id/shareedit(.:format)                                 databases#shareedit
 #     database_table_table_relations GET    /databases/:database_id/tables/:table_id/table_relations(.:format)          table_relations#index
 #                                    POST   /databases/:database_id/tables/:table_id/table_relations(.:format)          table_relations#create
 #  new_database_table_table_relation GET    /databases/:database_id/tables/:table_id/table_relations/new(.:format)      table_relations#new
@@ -56,6 +58,7 @@
 #                               root GET    /                                                                           generator#index
 #                                    GET    /generator/:id(.:format)                                                    generator#create
 #                                    GET    /generator/tutorial/:id(.:format)                                           generator#tutorial
+#                                    GET    /generator/qr/:id(.:format)                                                 generator#qr
 #
 
 Rails.application.routes.draw do
@@ -63,6 +66,7 @@ Rails.application.routes.draw do
 
   
   get 'session/new'
+
 
 
   post '/login' => 'session#create'
@@ -78,6 +82,7 @@ Rails.application.routes.draw do
   end
 
     resources :databases do
+      get '/shareedit' => 'databases#shareedit'
       get '/:auth' => 'databases#shareview'
       resources :tables do    
         resources :table_relations

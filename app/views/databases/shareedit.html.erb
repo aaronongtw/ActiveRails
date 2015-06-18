@@ -1,6 +1,6 @@
 
 <div id="databasecanvas">
-<h2>Tables Created in <%=link_to(@database.name, edit_database_path)%>  <i class="fa fa-pencil"></i> </h2> 
+<h2><%=@database.name%> </h2>
 <% if @database.tables.any? %>
   <% @database.tables.each do |t|%> 
   <div class="mBox 1"> 

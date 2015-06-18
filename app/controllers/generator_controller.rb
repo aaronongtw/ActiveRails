@@ -12,19 +12,13 @@ class GeneratorController < ApplicationController
 
   def qr
     @database = Database.find(params[:id])
-    @auth = @current_user.email.hash
-    # @data_in_str = @database.name + "\n" 
-    # @database.tables.each do |t|
-    #  @data_in_str += t.name + ",["
-    #  t.table_relations.each do |tr|
-    #   @data_in_str += tr.relationship + ',' + tr.table_to + ',' + tr.through + '|'
-    # end
-    # @data_in_str += "],["
-    #  t.fields.each do |f|
-    #   @data_in_str += f.name + ':' + f.fieldtype + ','
-    # end
-    # @data_in_str += "]\n"
-    # end
+    
+    if params[:allow] == "on"
+      @auth = @current_user.email.hash - 1
+    else
+      @auth = @current_user.email.hash
+    end
+
     @datapath = "http://ottadd.herokuapp.com/databases/#{@database.id}/#{@auth}"
     @qr = RQRCode::QRCode.new( @datapath, :size => 7, :level => :h )
   end
@@ -113,6 +107,7 @@ end
     end
   end
 end
+@text += "system('rake db:create')\n"
 @text += "system('rake db:migrate')"
     send_data @text, :filename => "#{@filename}"+'.rb'
 end
