@@ -79,7 +79,7 @@ end
 @database.tables.each do |table|  
   table.table_relations.each do|r|
           if r.relationship.include? 'has_and_belongs_to_many'
-            @relationshiptable = [table.name, r.table_to].sort.join('_')
+            @relationshiptable = [table.name.pluralize, r.table_to.pluralize].sort.join('_')
             @text += "system('rails generate migration create_#{@relationshiptable} #{table.name}_id:integer #{r.table_to}_id:integer') \n"
           end
           if r.relationship.include? 'through'
