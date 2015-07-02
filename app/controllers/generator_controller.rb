@@ -29,9 +29,48 @@ class GeneratorController < ApplicationController
   end
 
   def generate_scaffold
+    @text = ""
+    if params[:test] == "on"
+    @text += "File.open('Gemfile','a') do |l|
+      l.puts(\"
+gem 'remove_turbolinks'
+gem 'devise'
+
+group :development do
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
+  gem 'annotate'
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+end
+
+
+group :development, :test do
+  gem 'simplecov', :require => false
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'faker'
+  gem 'factory_girl_rails'
+end\")\nend\n"
+
+    @text += "system('bundle')\n"
+    @text += "system('rails g rspec:install')\n"
+    @text += "
+  specfile = File.read('spec/spec_helper.rb')
+  File.open('spec/spec_helper.rb', 'w') do |l|
+  l.puts(\"require 'simplecov'\")
+  l.puts(\"SimpleCov.start\")
+  l.puts(specfile)
+  end\n"
+
+    @text += "system('rails generate remove_turbolinks:remove')\n"
+  else
+  end
     @database = Database.find(params[:id])
     @filename = params[:fname]
-    @text = ""
+    
     @database.tables.each do |table|
 
       @text += "system('rails g scaffold #{table.name} "
@@ -107,8 +146,21 @@ end
     end
   end
 end
+
+
 @text += "system('rake db:create')\n"
-@text += "system('rake db:migrate')"
+
+if params[:test] == "on"
+@text += "system('rails generate devise:install')\n"
+@text += "system('rails generate devise User')\n"
+@text += "system('rails generate devise:views')\n"
+@text += "system('rake db:migrate')\n"
+@text += "system('rspec')\n"
+c
+else
+  @text += "system('rake db:migrate')\n"
+  @text += "system('rake stats')\n"
+  end
     send_data @text, :filename => "#{@filename}"+'.rb'
 end
 
