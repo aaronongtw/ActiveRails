@@ -156,7 +156,6 @@ if params[:test] == "on"
 @text += "system('rails generate devise:views')\n"
 @text += "system('rake db:migrate')\n"
 @text += "system('rspec')\n"
-c
 else
   @text += "system('rake db:migrate')\n"
   @text += "system('rake stats')\n"
